@@ -1,14 +1,14 @@
 package com.conor;
 
-import java.util.List;
+import java.util.Queue;
 
 public class Elevator implements Runnable {
 
-    private List<Request> requestBank;
+    private Queue<Request> requestBank;
     private int previousFloor;
     private int currentFloor;
 
-    public Elevator(List<Request> requests) {
+    public Elevator(Queue<Request> requests) {
         this.requestBank = requests;
     }
 
@@ -34,7 +34,7 @@ public class Elevator implements Runnable {
                     logError(Thread.currentThread().getName());
                 }
             }
-            return requestBank.get(0);
+            return requestBank.poll();
         }
     }
 
@@ -45,7 +45,7 @@ public class Elevator implements Runnable {
             //doors are closed and i'm moving, but i'll check for intermediate floors just in case
             Request intermediateRequest = null;
             if(!requestBank.isEmpty()) {
-                    //search request bank for intermediate requests
+                //search request bank for intermediate requests
             }
 
             previousFloor = currentFloor;

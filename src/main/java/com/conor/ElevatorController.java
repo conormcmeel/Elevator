@@ -8,11 +8,11 @@ import java.util.*;
 public class ElevatorController {
 
     public static final int NUMBER_OF_FLOORS = 5;
-    public static final int NUMBER_OF_ELEVATORS = 1;
+    public static final int NUMBER_OF_ELEVATORS = 4;
 
     public static void main(String[] args) throws InterruptedException, IOException {
 
-        List<Request> requestBank = new LinkedList<>();
+        Queue<Request> requestBank = new LinkedList<>();
 
         startElevators(NUMBER_OF_ELEVATORS, requestBank);
 
@@ -21,7 +21,7 @@ public class ElevatorController {
         }
     }
 
-    private static void startElevators(int numberOfElevators, List<Request> requests) {
+    private static void startElevators(int numberOfElevators, Queue<Request> requests) {
         for(int i=1; i<=numberOfElevators; i++) {
             Runnable elevator = new Elevator(requests);
             Thread t = new Thread(elevator);
@@ -30,7 +30,7 @@ public class ElevatorController {
         }
     }
 
-    private static void serviceUserRequest(List<Request> requestBank) throws IOException, InterruptedException {
+    private static void serviceUserRequest(Queue<Request> requestBank) throws IOException, InterruptedException {
         Set<Integer> destinations = getDestinations();
         System.out.println();
 
