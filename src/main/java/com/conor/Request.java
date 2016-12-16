@@ -1,19 +1,15 @@
 package com.conor;
 
+import java.util.Set;
+
 public class Request {
-    private int from;
-    private int to;
+    private Set<Integer> destinations;
 
-    public Request(int from, int to) {
-        this.from = from;
-        this.to = to;
+    public Request(Set<Integer> destinations) {
+        this.destinations = destinations;
     }
 
-    public int getFrom() {
-        return from;
-    }
-
-    public int getTo() {
-        return to;
+    public Set<Integer> getDestinations() {
+        return destinations;
     }
 }
