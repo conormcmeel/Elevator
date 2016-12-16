@@ -4,29 +4,29 @@ import java.util.Queue;
 
 public class Elevator implements Runnable {
 
-    private Queue<Request> userRequests;
+    private Queue<Request> requestBank;
     private int oldFloor;
     private int currentFloor;
 
     public Elevator(Queue<Request> requests) {
-        this.userRequests = requests;
+        this.requestBank = requests;
     }
 
     @Override
     public void run() {
 
         while (true) {
-            synchronized (userRequests) {
+            synchronized (requestBank) {
 
-                while (userRequests.isEmpty()) {
+                while (requestBank.isEmpty()) {
                     try {
-                        userRequests.wait();
+                        requestBank.wait();
                     } catch (InterruptedException e) {
                         System.out.print(Thread.currentThread().getName() + "interrupted");
                     }
                 }
 
-                Request request = userRequests.poll();
+                Request request = requestBank.poll();
 
                 for(Integer destination : request.getDestinations()){
                     oldFloor = currentFloor;
